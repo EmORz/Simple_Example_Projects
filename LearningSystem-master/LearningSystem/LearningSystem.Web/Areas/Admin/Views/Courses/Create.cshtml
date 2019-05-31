@@ -1,0 +1,26 @@
+﻿@model LearningSystem.Web.Areas.Admin.Models.Course.CreateCourseBindingModel
+@{
+    ViewData["Title"] = "Create course";
+}
+
+<h2>@ViewData["Title"]</h2>
+<form asp-area="Admin" asp-controller="Courses" asp-action="Create" method="post">
+    @Html.FormGroupFor(model => model.Name)
+    @Html.FormGroupFor(model => model.Slug)
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-push-2">
+            <input type="submit" value="Create" class="btn btn-success" />
+            <a asp-area="Admin" asp-controller="Courses" asp-action="Index" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/js/create-slug.js"></script>
+    <script>
+       $(function () {
+            createSlug("@(Html.IdFor(model => model.Name))", "@(Html.IdFor(model => model.Slug))");
+        });
+    </script>
+}

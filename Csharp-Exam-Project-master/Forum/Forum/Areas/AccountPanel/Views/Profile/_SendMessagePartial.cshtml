@@ -1,0 +1,43 @@
+﻿@using Forum.ViewModels.Message;
+@model SendMessageInputModel;
+<h2 class="text-forum">Send @Model.RecieverName a message</h2>
+<div class="content-container mt-25">
+    <input asp-for="RecieverId" type="hidden" hidden="hidden" />
+    <div class="p-10 text-end">
+        <textarea asp-for="Description" rows="5" class="full-width font-18"></textarea>
+        <button id="sendButton" class="m-0 p-0 submit-button menu-bg-forum text-white" type="submit"><i class="fas fa-share-square"></i></button>
+    </div>
+    <div id="chat-emoticons-wrapper" class="text-center p-10">
+        <button type="button" class="emote">😀</button>
+        <button type="button" class="emote">😃</button>
+        <button type="button" class="emote">😄</button>
+        <button type="button" class="emote">😆</button>
+        <button type="button" class="emote">🤣</button>
+        <button type="button" class="emote">🙂</button>
+        <button type="button" class="emote">😉</button>
+        <button type="button" class="emote">😊</button>
+        <button type="button" class="emote">😇</button>
+        <button type="button" class="emote">😍</button>
+        <button type="button" class="emote">😘</button>
+        <button type="button" class="emote">😋</button>
+        <button type="button" class="emote">😛</button>
+        <button type="button" class="emote">🤑</button>
+        <button type="button" class="emote">🤔</button>
+        <button type="button" class="emote">😐</button>
+        <button type="button" class="emote">😶</button>
+        <button type="button" class="emote">😬</button>
+        <button type="button" class="emote">😴</button>
+        <button type="button" class="emote">🤒</button>
+        <button type="button" class="emote">😎</button>
+        <button type="button" class="emote">🙁</button>
+        <button type="button" class="emote">😮</button>
+        <button type="button" class="emote">😲</button>
+        <button type="button" class="emote">😥</button>
+        <button type="button" class="emote">😭	</button>
+        <button type="button" class="emote">😓</button>
+        <button type="button" class="emote">😡</button>
+        <button type="button" class="emote">😈</button>
+        <button type="button" class="emote">💩</button>
+        <button type="button" class="emote">❤</button>
+    </div>
+</div>

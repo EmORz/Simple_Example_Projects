@@ -1,0 +1,126 @@
+﻿@inject IOptions<StripeSettings> Stripe
+@model IEnumerable<UnravelTravel.Models.ViewModels.ShoppingCart.ShoppingCartActivityViewModel>
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<h3 class="text-center">Shopping Cart</h3>
+<table class="table table-hover table-borderless" style="width: 100%" id="shoppingCart">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateString)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityHourString)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityDestinationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="text-dark" asp-area="" asp-controller="Activities" asp-action="Details" asp-route-id="@item.ActivityId">
+                        @item.ActivityNameSubstring
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateString)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityHourString)
+                </td>
+                <td>
+                    <a class="text-dark" asp-area="" asp-controller="Destinations" asp-action="Details" asp-route-id="@item.ActivityDestinationId">
+                        @item.ActivityDestinationName
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityPrice)$
+                </td>
+                <td>
+                    @if (this.User.IsInRole(GlobalConstants.UserRoleName))
+                    {
+                        <form method="post" asp-area="" asp-controller="ShoppingCart" asp-action="Edit" asp-route-id="@item.Id" asp-route-newQuantity="newQuantity">
+                            <div class="row">
+                                <input type="number" min="1" id="newQuantity" name="newQuantity" class="form-control form-control-sm col-sm-3" value="@item.Quantity" />&nbsp;
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Edit</button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="text-center" method="post" asp-area="" asp-controller="ShoppingCart" asp-action="Edit" asp-route-id="@item.ActivityId" asp-route-newQuantity="newQuantity">
+                            <div class="row">
+                                <input type="number" id="newQuantity" name="newQuantity" class="form-control form-control-sm col-md-3" value="@item.Quantity" />
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Edit</button>
+                            </div>
+                        </form>
+                    }
+                </td>
+                <td>
+                    @if (this.User.IsInRole(GlobalConstants.UserRoleName))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ActivityId })
+
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="">
+    <div class="text-center">
+        <h5>Total sum: @Model.Sum(x => x.ShoppingCartActivityTotalPrice) $</h5>
+        <div class="row d-flex justify-content-around">
+            <form asp-controller="ShoppingCart" , asp-action="Charge" method="POST">
+                <script src="//checkout.stripe.com/v2/checkout.js"
+                        class="stripe-button"
+                        data-key="@Stripe.Value.PublishableKey"
+                        data-description="Pay for your tickets now"
+                        data-amount="@(Model.Sum(x => x.ShoppingCartActivityTotalPrice) * 100)">
+                </script>
+            </form>
+            @if (this.User.IsInRole(GlobalConstants.UserRoleName))
+            {
+                <form class="text-center" method="post" asp-area="" asp-controller="Tickets" asp-action="Book">
+                    <button type="submit" class="stripe-button-el">
+                        <span style="display: block; min-height: 30px;">Pay when you get there</span>
+                    </button>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#shoppingCart')
+                .addClass('nowrap')
+                .dataTable({
+                    responsive: true,
+                });
+        });
+    </script>
+}

@@ -1,0 +1,55 @@
+﻿@using Forum.ViewModels.Role;
+@using Forum.Services.Common;
+@model IEnumerable<UserRoleViewModel>
+
+<div id="shoutbox" class="menu-bg-forum text-center">
+    <h1><a id="main-heading-text" href="#">Edit Roles</a></h1>
+</div>
+<div class="text-center bg-light text-forum block m-10px">
+    <h3 class="m-0">
+        <label class="text-forum">Search:</label>
+    </h3>
+    <form autocomplete="off" action="/" method="post">
+        <div class="autocomplete">
+            <input id="myInput" class="full-width border-5 border-none" type="text" placeholder="Search for users..." />
+        </div>
+        <div class="center-button">
+            <button id="searchButton" class="m-0 submit-button menu-bg-forum text-white" type="button">Search</button>
+        </div>
+    </form>
+</div>
+<div id="edit-roles-table-div">
+    <partial name="_EditRolesTablePartial" model="Model" />
+</div>
+<div>
+    @{
+        var counter = 0;
+    }
+    <ul class="font-18 text-center text-forum">
+        @for (int i = 0; i < (int)this.ViewData["pagesCount"]; i++)
+        {
+            var index = i + 1;
+            <li class="display-inline"><a class="menu-bg-forum p-10 text-white border-5" href="/Owner/Role/Index?start=@counter">@index</a></li>
+            counter = counter + 5;
+        }
+    </ul>
+</div>
+
+@section Scripts{
+    <script src="~/js/searchAutocomplete.js"></script>
+    <script>
+    /*An array containing all the user names in the db:*/
+    var names = [];
+
+    @foreach (var name in (List<string>)this.ViewData["usernames"])
+    {
+        @: names = names.concat('@name');
+    }
+
+    /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+    autocomplete(document.getElementById("myInput"), names);
+    </script>
+
+    <script src="~/js/roleEditTableResponsiveness.js"></script>
+    <script src="~/js/searchForUsersWithRoles.js"></script>
+}

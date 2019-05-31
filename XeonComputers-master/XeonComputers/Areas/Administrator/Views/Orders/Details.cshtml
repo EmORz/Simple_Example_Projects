@@ -1,0 +1,43 @@
+﻿@model OrderDetailsViewModel
+
+@{
+    ViewData["Title"] = "Детайли за поръчката";
+}
+
+<div class="mobile-fondsize-20 h3 font-italic text-muted text-center">Детайли за поръчката</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="shadow p-4 mb-4 bg-white">
+            <div class="mobile-fondsize-20 h6 text-center font-italic">Данни за пратката</div>
+            <p class="mb-0"><strong>Получател:</strong> @Model.Recipient</p>
+            <p class="mb-0"><strong>Номер на получателя:</strong> @Model.RecipientPhoneNumber</p>
+            <p class="mb-0"><strong>Град:</strong> @Model.DeliveryAddressCityName</p>
+            <p class="mb-0"><strong>Пощенски код:</strong> @Model.DeliveryAddressCityPostcode</p>
+            <p class="mb-0"><strong>Улица:</strong> @Model.DeliveryAddressStreet</p>
+            <p class="mb-0"><strong>Допълнително описание:</strong> @Model.DeliveryAddressDescription</p>
+            <p class="mb-0"><strong>Цена:</strong> @Model.TotalPrice лв.</p>
+        </div>
+        <div class="shadow p-4 mb-4 bg-white">
+            <div class="mobile-fondsize-20 h6 text-center font-italic">Други детайли</div>
+            <p class="mb-0"><strong>Номер на поръчката:</strong> @Model.Id</p>
+            @if (@Model.XeonUserCompanyName != null)
+            {
+                <p class="mb-0"><strong>Име на компанията:</strong> @Model.XeonUserCompanyName</p>
+            }
+            <p class="mb-0"><strong>Номер на фактурата:</strong> @Model.InvoiceNumber</p>
+            <p class="mb-0"><strong>Статус на поръчката:</strong> @Model.Status</p>
+            <p class="mb-0"><strong>Статус на плащане:</strong> @Model.PaymentStatus</p>
+            <p class="mb-0"><strong>Метод на плащане:</strong> @Model.PaymentType</p>
+            <p class="mb-0"><strong>Дата на поръчката:</strong> @Model.OrderDate</p>
+            <p class="mb-0"><strong>Дата на изпращане:</strong> @Model.DispatchDate</p>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        @await Component.InvokeAsync(typeof(XeonComputers.Components.OrderProductsComponent), new { OrderId = Model.Id })
+        @if (@Model.EasyPayNumber != null)
+        {
+            <div class="h4">Номер за плащане в системата на EasyPay: </div>
+            <div class="h3 font-weight-bold text-center text-danger">@Model.EasyPayNumber</div>
+        }
+    </div>
+</div>

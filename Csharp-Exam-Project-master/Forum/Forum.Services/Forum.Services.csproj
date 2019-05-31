@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.6.0" />
+    <PackageReference Include="HtmlSanitizer" Version="4.0.199" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forum.Data\Forum.Data.csproj" />
+    <ProjectReference Include="..\Forum.MapConfiguration\Forum.MapConfiguration.csproj" />
+    <ProjectReference Include="..\Forum.Models\Forum.Models.csproj" />
+    <ProjectReference Include="..\Forum.Services.Common\Forum.Services.Common.csproj" />
+    <ProjectReference Include="..\Forum.Services.Interfaces\Forum.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Forum.ViewModels.Interfaces\Forum.ViewModels.Interfaces.csproj" />
+    <ProjectReference Include="..\Forum.ViewModels\Forum.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

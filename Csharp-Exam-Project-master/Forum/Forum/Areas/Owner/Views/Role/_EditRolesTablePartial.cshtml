@@ -1,0 +1,37 @@
+﻿@using Forum.ViewModels.Role;
+@using Forum.Services.Common;
+@model IEnumerable<UserRoleViewModel>
+<table class="two-thirds-width posts-table mx-5-auto">
+    <thead class="posts-table-head">
+        <tr>
+            <th class="p-10 bottom-black-border"><h2 class="m-10px">User</h2></th>
+            <th class="p-10 bottom-black-border"><h2 class="m-10px">Role</h2></th>
+            <th class="p-10 bottom-black-border"><h2 id="role-edit-actions-header" class="m-10px">Actions</h2></th>
+        </tr>
+    </thead>
+    <tbody class="text-center p-0 bg-white">
+        @foreach (var userRole in Model)
+        {
+            <tr>
+                <td class="text-forum bold m-0">
+                    <input type="hidden" hidden="hidden" class="oldUsername" value="@userRole.User.UserName" />
+                    <h3 class="mx-10px username">@userRole.User.UserName</h3>
+                </td>
+                <td class="text-forum bold m-0">
+                    <input type="hidden" hidden="hidden" class="oldRoleName" value="@userRole.Role.Name" />
+                    <h3 class="mx-10px roleName">@userRole.Role.Name</h3>
+                </td>
+                <td class="text-forum bold m-0">
+                    @if (userRole.Role.Name == Role.User)
+                    {
+                        <div class="mx-10px"><a asp-area="Owner" asp-controller="Role" asp-action="Promote" asp-route-id="@userRole.UserId" class="menu-bg-forum p-10 text-white border-5">Promote</a></div>
+                    }
+                    else if (userRole.Role.Name == Role.Administrator)
+                    {
+                        <div class="mx-10px"><a asp-area="Owner" asp-controller="Role" asp-action="Demote" asp-route-id="@userRole.UserId" class="text-white p-10 border-5 bg-dark-red">Demote</a></div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

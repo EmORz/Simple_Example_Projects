@@ -1,0 +1,44 @@
+﻿@using Forum.ViewModels.Profile;
+@using Forum.ViewModels.Message;
+@model ProfileInfoViewModel;
+
+<div class="bg-white">
+    <div class="profile-container m-0">
+        <div id="profile-pic-holder" class="text-center bg-white m-0">
+            <div class="menu-bg-forum m-0 p-10 text-center">
+                <h4 class="text-white m-0">Username: @this.ViewData["username"]</h4>
+                @if (this.ViewData["profilePicUrl"] == null)
+                {
+                    <i id="profilePic" class="fas fa-user-alt fa-10x text-white m-5"></i>
+                }
+                else
+                {
+                    <img class="mt-25 circle" height="200" width="200" src="@this.ViewData["profilePicUrl"]" />
+                }
+                <div class="m-5">
+                    <a class="border-none border-5 font-14 bold p-10 m-10px bg-white text-forum modalBtn">Send Message</a>
+                </div>
+                @{
+                    var recieverId = this.ViewData["userId"].ToString();
+
+                    var recieverName = this.ViewData["username"].ToString();
+                }
+                <div class="modal modalElement">
+                    <div class="modal-content border-5 bg-white">
+                        <span class="close">&times;</span>
+                        <partial name="_SendMessagePartial.cshtml" model="@new SendMessageInputModel() { RecieverId = recieverId, RecieverName = recieverName }" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="profile-target-div" class="bg-white max-content-height p-10">
+            <partial name="_MyProfilePartial" model="@Model" />;
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/modal.js"></script>
+    <script src="~/js/sendMessages.js"></script>
+}

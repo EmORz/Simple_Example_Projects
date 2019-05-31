@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Http
+@model UnravelTravel.Models.InputModels.Home.SearchInputModel
+@{
+    this.ViewData["Title"] = "Home Page";
+    var destinations = this.ViewData["Destinations"] as IEnumerable<SelectListItem>;
+}
+
+<cache expires-after="@TimeSpan.FromHours(4)">
+    @await this.Html.PartialAsync("_CarouselPartial")
+    <br />
+    @await this.Html.PartialAsync("_MainEntitiesPartial")
+</cache>
+<br />
+
+<div id="searchContainer" class="jumbotron text-center" style="padding-top: 30px; padding-bottom: 30px;">
+    @await this.Html.PartialAsync("_SearchFormPartial", @Model)
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

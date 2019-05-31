@@ -1,0 +1,50 @@
+﻿<div class="bg-white">
+    <div class="profile-container m-0">
+        <div id="profile-pic-holder" class="text-center bg-white m-0">
+            <div class="menu-bg-forum m-0 p-10 text-center">
+                <h4 class="text-white m-0">Username: @this.User.Identity.Name</h4>
+                @if (this.ViewData["profilePicUrl"] == null)
+                {
+                    <i id="profilePic" class="fas fa-user-alt fa-10x text-white m-5"></i>
+                    <form enctype="multipart/form-data" method="post" asp-area="AccountPanel" asp-controller="Profile" asp-action="UploadProfilePicture">
+                        <input class="submit-button border-none border-5 font-14 bold p-10 m-10px" type="submit" value="Upload picture">
+                        <input class="menu-bg-forum text-white" name="image" type="file" />
+                    </form>
+                }
+                else
+                {
+                    <img class="mt-25 circle" height="200" width="200" src="@this.ViewData["profilePicUrl"]" />
+                    <form enctype="multipart/form-data" method="post" asp-area="AccountPanel" asp-controller="Profile" asp-action="UploadProfilePicture">
+                        <input class="submit-button border-none border-5 font-14 bold p-10 m-10px" type="submit" value="Change picture">
+                        <input class="menu-bg-forum text-white" name="image" type="file" />
+                    </form>
+                }
+            </div>
+            <div id="chat-conversations-div">
+
+            </div>
+        </div>
+        <div id="profile-navigation-holder">
+            <nav class="main-nav menu-bg-forum border-5">
+                <div class="three-fragments-grid full-width text-center">
+                    <div class="display-inline">
+                        <button id="myProfileButton" class="menu-bg-forum full-width text-white border-none font-18 p-10">My Profile</button>
+                    </div>
+                    <div class="display-inline">
+                        <button id="messagesPanelButton" class="menu-bg-forum full-width text-white border-none font-18 p-10">Messages</button>
+                    </div>
+                    <div class="display-inline">
+                        <button id="settingsButton" class="menu-bg-forum full-width text-white border-none font-18 p-10">Settings</button>
+                    </div>
+                </div>
+                <div id="profile-target-div" class="bg-white max-content-height p-10">
+
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/profileButtonsAjax.js"></script>
+}

@@ -1,0 +1,13 @@
+﻿@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <div class="dropdown collapse navbar-collapse d-flex" id="navbarNav">
+        <a class="dropdown-toggle nav-link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin Panel
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" asp-area="Administrator" asp-controller="Destinations" asp-action="Create">Create Destination</a>
+            <a class="dropdown-item" asp-area="Administrator" asp-controller="Activities" asp-action="Create">Create Activity</a>
+            <a class="dropdown-item" asp-area="Administrator" asp-controller="Restaurants" asp-action="Create">Create Restaurant</a>
+        </div>
+    </div>
+}

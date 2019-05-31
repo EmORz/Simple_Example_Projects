@@ -1,0 +1,29 @@
+﻿@using Forum.ViewModels.Report;
+@model ReplyReportViewModel;
+<div>
+    <div class="p-10">
+        <h4 class="text-start text-white ">Author: <a class="profile-link text-white" href="/AccountPanel/Profile/Details?id=@Model.Author.Id">@Model.Author.UserName</a></h4>
+    </div>
+    <div class="p-10 text-forum bg-white report-description-container">
+        <blockquote class="bg-light border-5 p-10">
+            <div class="text-start">
+                <b>@Model.Reply.Author.UserName</b> said:
+            </div>
+            <hr />
+            <div class="text-center">
+                @Html.Raw(Model.Reply.Description)
+            </div>
+            <hr />
+            <div class="text-end"> on <b>@Model.Reply.RepliedOn.ToString("dd-MM-yyyy")</b></div>
+        </blockquote>
+        <h4 class="text-center">@Model.Title</h4>
+        <hr class="m-10px" />
+        <p>
+            @Model.Description
+        </p>
+    </div>
+    <div class="p-10">
+        <h5 class="text-end text-white m-0">Link to post <a class="profile-link text-white" href="/Post/Details?id=@Model.Reply.PostId" >here</a></h5>
+        <h5 class="text-end text-white m-0">Date: @Model.ReportedOn.ToString("dd-MM-yyyy")</h5>
+    </div>
+</div>

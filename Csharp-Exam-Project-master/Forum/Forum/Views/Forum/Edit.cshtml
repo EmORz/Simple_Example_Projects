@@ -1,0 +1,54 @@
+﻿@using Forum.ViewModels.Forum;
+@model ForumFormInputModel;
+
+<div class="container mx-5-auto">
+    <div id="shoutbox" class="menu-bg-forum text-center">
+        <h1><a id="main-heading-text" href="#">Edit Forum</a></h1>
+    </div>
+    <form class="my-form" asp-controller="Forum" asp-action="Edit">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input hidden="hidden" type="hidden" value="@this.ViewData["CreatedOn"]" name="createdOn">
+        <input hidden="hidden" type="hidden" value="@this.ViewData["ForumId"]" name="forumId">
+        <hr class="full-width">
+        <div class="block">
+            <label asp-for="ForumModel.Name" class="text-forum">@Model.ForumModel.Name</label>
+            <input asp-for="ForumModel.Name" class="half-width">
+            <div>
+                <span class="text-danger" asp-validation-for="ForumModel.Name"></span>
+            </div>
+        </div><div class="block">
+            <label asp-for="ForumModel.Description" class="text-forum">Description</label>
+            <textarea asp-for="ForumModel.Description" class="half-width post-textarea" rows="6" cols="10"></textarea>
+            <div>
+                <span asp-validation-for="ForumModel.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="block">
+            <label asp-for="ForumModel.Category" class="text-forum"></label>
+            <div class="styled-select">
+                <select asp-for="ForumModel.Category" class="menu-bg-forum half-width text-white">
+                    <option disabled selected="selected">Select Category</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        if (category.Text == this.Model.ForumModel.Category)
+                        {
+                            <option selected="selected" name="category" value="@category.Value">@category.Text</option>
+                        }
+                        else
+                        {
+                            <option name="category" value="@category.Value">@category.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="center-button">
+            <input onclick="window.history.back()" class="mt-25 submit-button menu-bg-forum text-white" type="button" value="Cancel">
+            <input class="mt-25 submit-button menu-bg-forum text-white" type="submit" value="Edit">
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

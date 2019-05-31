@@ -1,0 +1,26 @@
+﻿@model IEnumerable<StudentAllCoursesViewModel>
+
+@{
+    ViewData["Title"] = "All courses";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<ul id="all-courses" class="list-unstyled">
+    @Html.DisplayForModel()
+</ul>
+
+@section Scripts {
+    <script>
+        $(".instances").hide();
+
+        $("ul#all-courses > li").stop(true, true)
+            .click(function (e) {
+                $(".instances").hide("slow");
+
+                $(this).find("ul")
+                    .stop(true, true)
+                    .toggle("slow", "swing");
+            });
+    </script>
+}

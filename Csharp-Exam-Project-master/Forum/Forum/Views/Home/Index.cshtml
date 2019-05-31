@@ -1,0 +1,117 @@
+﻿@using Forum.ViewModels.Home;
+@model IndexInfoViewModel;
+
+<div id="shoutbox" class="menu-bg-forum text-center">
+    <h1><a id="main-heading-text" href="#">Powered by MPF-Team</a> </h1>
+</div>
+<div class="content-container">
+    <div>
+        @foreach (var category in Model.Categories)
+        {
+            <div class="forum-container">
+                <a class="toggleBtn text-forum"><i class="fas fa-caret-up float-right font-30 m-10px toggleIcon"></i></a>
+                <h2>@category.Name</h2>
+                <div class="forum-information-container toggle-div">
+                    <div class="forum-content">
+                        @if (!category.Forums.Any())
+                        {
+                            <div class="post-image">
+                            </div>
+                            <div class="post-title">
+
+                                <div class="post-title">
+                                    <div class="content-container">
+                                        <div>
+                                            <p>No subforums.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @foreach (var forum in category.Forums)
+                            {
+                                <div class="post-image">
+                                    <i class="fas fa-clone fa-lg forum-icon"></i>
+                                </div>
+                                <div class="post-title">
+                                    <div class="post-title">
+                                        <div class="content-container">
+                                            <div>
+                                                <a href="/Forum/Posts?Id=@forum.Id"><h3 class="text-forum">@forum.Name</h3></a>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    @*TODO: Find a better way*@
+                                                    <p style="font-size: 14px; margin:8px 0px;">Total views: @forum.Posts.Sum(p => p.Views)</p>
+                                                </div>
+                                                <div style="margin:0">
+                                                    <p style="font-size: 14px; margin:0">Created on: @forum.CreatedOn.ToString("dd-MM-yyyy")</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div>
+        <div class="forum-container">
+            <a class="toggleBtn text-forum"><i class="fas fa-caret-up float-right font-30 m-10px toggleIcon"></i></a>
+            <h2 class="font-18">Latest Topics</h2>
+            <div class="forum-information-container menu-bg-forum toggle-div">
+                <div class="forum-content">
+                    @foreach (var latestPost in Model.LatestPosts)
+                    {
+                        <div class="post-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="post-title">
+                            <a href="/Post/Details?id=@latestPost.Id"><h4 class="m-10px text-forum">@latestPost.Name</h4></a>
+                            <p class="m-0 font-14 ">Started on @latestPost.StartedOn</p>
+                            <p class="m-0 font-14 ">by @latestPost.AuthorName</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="forum-container">
+            <a class="toggleBtn text-forum"><i class="fas fa-caret-up float-right font-30 m-10px toggleIcon"></i></a>
+            <h2 class="font-18">Popular Topics</h2>
+            <div class="forum-information-container menu-bg-forum toggle-div">
+                <div class="forum-content">
+                    @foreach (var popularPost in Model.PopularPosts)
+                    {
+                        <div class="post-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="post-title">
+                            <a href="/Post/Details?id=@popularPost.Id"><h4 class="m-10px text-forum">@popularPost.Name</h4></a>
+                            <p style="display: inline; font-size: 14px; margin:0">Views: @popularPost.Views</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="info" class="two-thirds-width mx-auto">
+    <div class="info-block">
+        <p class="text-forum">Newest Member: @Model.NewestUser</p>
+    </div>
+    <div class="info-block">
+        <p class="text-forum">Total Posts: @Model.TotalPostsCount</p>
+    </div>
+    <div class="info-block">
+        <p class="text-forum">Total users: @Model.TotalUsersCount</p>
+    </div>
+</div>
+@section Scripts{
+   <script src="~/js/toggle.js"></script>
+}

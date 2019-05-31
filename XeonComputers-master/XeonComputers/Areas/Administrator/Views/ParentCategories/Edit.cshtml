@@ -1,0 +1,29 @@
+﻿@model XeonComputers.Areas.Administrator.ViewModels.ParentCategory.ParentCategoryViewModel
+
+@{
+    ViewData["Title"] = "Промени основна категория";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <section>
+            <form method="post" asp-controller="ParentCategories" asp-action="Edit" asp-route-id="@Model.Id">
+                <h3 class="mobile-fondsize-20 text-muted">@ViewData["Title"]</h3>
+                <hr />
+                <div class="form-group">
+                    <label asp-for="@Model.Name"></label>
+                    <input asp-for="@Model.Name" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Промени</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,84 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.title-center {
+    text-align: center;
+}
+
+.contact-main {
+    padding-top: 50px;
+}
+
+.contact-main .title {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.contact-main .intro {
+    margin-bottom: 30px;
+    color: #999;
+}
+
+.contact-main .item .item-inner {
+    margin: 30px;
+    padding: 30px 10px;
+    background: #f5f5f5;
+    background-clip: border-box;
+    min-height: 300px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+.contact-main .item .details .day {
+    font-size: 13px;
+    color: #999;
+}
+
+.contact-main .item .details {
+    font-size: 18px;
+}
+
+.section {
+    display: block;
+}

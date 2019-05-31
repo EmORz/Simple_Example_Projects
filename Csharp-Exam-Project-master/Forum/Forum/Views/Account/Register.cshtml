@@ -1,0 +1,74 @@
+﻿@using Forum.ViewModels.Account
+@model RegisterUserViewModel
+
+<div id="shoutbox" class="menu-bg-forum text-center">
+    <h1><a id="main-heading-text" href="#">Register</a></h1>
+</div>
+<div class="container mx-5-auto">
+    <form class="my-form" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <hr class="two-thirds-width">
+        <div class="two-thirds-width register-container">
+            <div class="block">
+                <label asp-for="Username" class="text-forum"></label>
+                <input asp-for="Username" class="full-width" placeholder="Enter username...">
+                <span class="text-danger" asp-validation-for="Username"></span>
+            </div>
+            <div class="block">
+                <label asp-for="Email" class="text-forum"></label>
+                <input asp-for="Email" class="full-width" placeholder="Enter email...">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="block">
+                <label asp-for="Password" class="text-forum"></label>
+                <input asp-for="Password" class="full-width" placeholder="Enter password...">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="block">
+                <label asp-for="ConfirmPassword" class="text-forum">Confirm Password</label>
+                <input asp-for="ConfirmPassword" class="full-width" placeholder="Confirm password...">
+                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+            </div>
+        </div>
+        <div class="block">
+            <label asp-for="Location" class="text-forum"></label>
+            <input asp-for="Location" class="half-width" placeholder="Enter country name...">
+            <div>
+                <span class="text-danger" asp-validation-for="Location"></span>
+            </div>
+        </div>
+        <hr class="two-thirds-width">
+        <div class="block">
+            <label class="text-forum">Gender</label>
+        </div>
+        <div class="radio-div text-center">
+            <label asp-for="Gender" class="text-forum" for="male">Male</label>
+            <input asp-for="Gender" type="radio" class="checkmark" name="gender" id="male" value="Male">
+            <span class="text-danger" asp-validation-for="Gender"></span>
+            <label asp-for="Gender" class="text-forum" for="female">Female</label>
+            <input asp-for="Gender" type="radio" class="checkmark" name="gender" id="female" value="Female">
+            <span class="text-danger" asp-validation-for="Gender"></span>
+            <label asp-for="Gender" class="text-forum " for="other">Other</label>
+            <input asp-for="Gender" type="radio" class="checkmark" name="gender" id="other" value="Other">
+            <span class="text-danger" asp-validation-for="Gender"></span>
+        </div>
+        <hr class="half-width">
+        <div class="text-forum text-center bg-light mt-25">
+            <div class="m-10px">
+                <label class="bold font-18">Choose profile picture</label>
+            </div>
+            <input class="bg-light" type="file" asp-for="Image" formenctype="multipart/form-data" />
+            <span class="text-danger" asp-validation-for="Image"></span>
+        </div>
+        <hr class="half-width">
+        <div class="center-button">
+            <input class="submit-button menu-bg-forum text-white" type="submit" value="Register">
+        </div>
+    </form>
+
+    <p><em> Already have an account? You can sign in <a asp-controller="Account" asp-action="Login">here</a>!</em></p>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

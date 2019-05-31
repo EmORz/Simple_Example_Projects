@@ -1,0 +1,13 @@
+﻿@using Forum.ViewModels.Report;
+<div class="post-button-div m-10px">
+    <a asp-controller="Forum" asp-action="Edit" asp-route-id="@Model.Forum.Id" class="menu-bg-forum p-10 border-5 text-white display-inline"><h3 class="m-10px display-inline"><i class="fas fa-edit"></i> Edit Forum</h3></a>
+</div>
+<div class="post-button-div m-10px">
+    <a class="modalBtn bg-dark-red border-5 p-10 display-inline mr-5"><h3 class="m-10px display-inline"><i class="fas fa-trash-alt"></i> Delete Forum</h3></a>
+    <div class="modal modalElement">
+        <div class="modal-content p-10 border-5 bg-dark-red">
+            <span class="close">&times;</span>
+            <partial name="../Forum/_DeletePartial.cshtml" />
+        </div>
+    </div>
+</div>

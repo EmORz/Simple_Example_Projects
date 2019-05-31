@@ -1,0 +1,36 @@
+﻿@if (!this.Context.Request.Cookies.Any(x => x.Key == "GDPR" && x.Value == "true"))
+{
+<div id="cookieConsentDiv" class="text-forum bg-burly m-0 text-center font-18 bold p-10">
+    <div class="collapse navbar-collapse">
+        <h2 class="navbar-text m-10px">
+            Use this space to summarize your privacy and cookie use policy.
+        </h2>
+        <div class="navbar-right m-10px">
+            <a class="modalBtn">Learn More</a>
+            <div class="modal modalElement">
+                <div id="gdprDiv" class="modal-content border-5 menu-bg-forum overflow-auto">
+                    <div>
+                        <span class="close">&times;</span>
+                    </div>
+                    <partial name="_GdprConsentPartial.cshtml" />
+                </div>
+            </div>
+            <button id="consentAcceptBtn" type="button" class="border-5 p-10 font-18 menu-bg-forum border-none text-white bold">Accept</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/modal.js"></script>
+<script>
+    document.getElementById("consentAcceptBtn").onclick = function () {
+        $.ajax(
+            {
+                type: "GET",
+                url: "/Home/AcceptConsent",
+                success: function () {
+                    document.getElementById('cookieConsentDiv').style.display = "none";
+                }
+            });
+    };
+</script>
+}

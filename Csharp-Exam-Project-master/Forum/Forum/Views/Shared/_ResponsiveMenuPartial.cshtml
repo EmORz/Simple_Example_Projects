@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ForumUser> SignInManager
+@inject UserManager<ForumUser> UserManager
+
+<a class="font-25" href="/">Home</a>
+<a class="font-25" asp-controller="Home" asp-action="About">Rules</a>
+@if (this.User.Identity.IsAuthenticated)
+{
+    <a class="font-25 bold text-white" href="/Account/Profile">Profile</a>
+    @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Owner"))
+    {
+        <a class="font-25" asp-controller="Forum" asp-action="Create">New Forum</a>
+        <a class="font-25" asp-controller="Category" asp-action="Create">New Category</a>
+        <a class="font-25" asp-controller="Report" asp-action="All">View Reports</a>
+        @if (this.User.IsInRole("Owner"))
+        {
+            <a class="font-25" asp-area="Owner" asp-controller="Role" asp-action="Index">Edit Roles</a>
+        }
+    }
+}
+@if (this.User.Identity.IsAuthenticated)
+{
+    <a class="font-25 bold text-white" href="/Account/Dismiss">Logout</a>
+}
+else
+{
+    <a class="font-25 bold text-white" href="/Account/Register">Register</a>
+    <a class="font-25 bold text-white" href="/Account/Login">Login</a>
+}

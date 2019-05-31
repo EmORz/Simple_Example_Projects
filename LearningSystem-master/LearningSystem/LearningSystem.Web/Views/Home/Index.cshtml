@@ -1,0 +1,65 @@
+﻿@using LearningSystem.Models.Identity
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1 class="text-center">Hello, @UserManager.GetUserName(User)</h1>
+    <hr/>
+
+    if (Model.CourseInstances.Any())
+    {
+        foreach (var courseInstance in Model.CourseInstances)
+        {
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center"></div>
+                <div class="card-body">
+                    <h4 class="card-title">@courseInstance.CourseName</h4>
+                    <p class="card-text">@courseInstance.CourseDescription</p>
+                </div>
+                <a asp-area=""
+                   asp-controller="Courses" 
+                   asp-action="Details"
+                   asp-route-id="@courseInstance.CourseId"
+                   class="btn btn-primary">View</a>
+            </div>
+        }
+        <h2>Latest articles:</h2>
+        <div class="container">
+            <div class="row">
+                @Html.DisplayFor(x => x.Articles)
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-danger mb-3" style="max-width: 20rem;">
+            <div class="card-header text-center">No courses!</div>
+            <div class="card-body">
+                <h4 class="card-title">No enrolled course!</h4>
+                <p class="card-text">You are not enrolled in any of our courses. <a asp-area="" asp-controller="Courses" asp-action="All">explore</a> our courses.</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="jumbotron">
+        <h1 class="display-3">Welcome to Learning System!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
+    <partial name="_SearchFormPartial"/>
+}

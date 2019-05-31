@@ -1,0 +1,113 @@
+﻿@model AdminNavbarViewModel
+
+<nav class="navbar navbar-expand-lg navbar-light py-0">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-truck"></i>
+                    @if (Model.UnprocessedOrdersCount != 0)
+                    {
+                        <sup>@Model.UnprocessedOrdersCount</sup>
+                    }
+                    Поръчки
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item dropdown-submenu px-1 py-0">
+                        <a asp-area="Administrator" asp-controller="Home" asp-action="Index" class="dropdown-item nav-link">
+                            Моите поръчки
+                            @if (Model.UnprocessedOrdersCount != 0)
+                            {
+                                <sup class="font-weight-bold text-danger">@Model.UnprocessedOrdersCount</sup>
+                            }
+                        </a>
+                    </li>
+                    <li class="dropdown-item dropdown-submenu px-1 py-0">
+                        <a asp-area="Administrator" asp-controller="Orders" asp-action="Delivered" class="dropdown-item nav-link">История</a>
+                    </li>
+                    <li class="dropdown-item dropdown-submenu px-1 py-0">
+                        <a href="#" class="nav-link dropdown-toggle dropdown-item">Доставчици</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item px-1 py-0">
+                                <a asp-controller="Suppliers" asp-action="All" class="dropdown-item nav-link">Виж всички</a>
+                            </li>
+                            <li class="dropdown-item px-1 py-0">
+                                <a asp-controller="Suppliers" asp-action="Create" class="dropdown-item nav-link">Добави нов</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a asp-area="Administrator" asp-controller="UserRequests" asp-action="Index" class="nav-link font-weight-bold">
+                    @if (Model.UserRequestsCount != 0)
+                    {
+                        <i class="fas fa-envelope" aria-hidden="true"><sup>@Model.UserRequestsCount</sup></i>
+                    }
+                    Запитвания
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-users"></i>
+                    @if (Model.PartnerRequestsCount != 0)
+                    {
+                        <sup>@Model.PartnerRequestsCount</sup>
+                    }
+                    Потребители
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a asp-area="Administrator" asp-controller="PartnerRequests" asp-action="All" class="dropdown-item nav-link">
+                        Заявки за партньорство
+                        @if (Model.PartnerRequestsCount != 0)
+                        {
+                            <sup class="font-weight-bold text-danger">@Model.PartnerRequestsCount</sup>
+                        }
+
+                    </a>
+                    <a asp-area="Administrator" asp-controller="Partners" asp-action="All" class="dropdown-item nav-link">Партньори</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Категории
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item dropdown-submenu px-1 py-0">
+                        <a href="#" class="dropdown-item nav-link dropdown-toggle">Под категории</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item px-1 py-0">
+                                <a asp-controller="ChildCategories" asp-action="All" class="dropdown-item nav-link">Виж всички</a>
+                            </li>
+                            <li class="dropdown-item px-1 py-0">
+                                <a asp-controller="ChildCategories" asp-action="Add" class="dropdown-item nav-link">Създай нова</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-item dropdown-submenu px-1 py-0">
+                        <a href="#" class="dropdown-item nav-link dropdown-toggle">Основни категории</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item px-1 py-0">
+                                <a asp-controller="ParentCategories" asp-action="All" class="dropdown-item nav-link">Виж всички</a>
+                            </li>
+                            <li class="dropdown-item px-1 py-0">
+                                <a asp-controller="ParentCategories" asp-action="Add" class="dropdown-item nav-link">Създай нова</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Продукти
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a asp-controller="Products" asp-action="Create" class="dropdown-item nav-link">Създай нов</a>
+                    <a asp-controller="Products" asp-action="All" class="dropdown-item nav-link">Всички продукти</a>
+                    <a asp-controller="Products" asp-action="AllHide" class="dropdown-item nav-link">Скрити продукти</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<hr class="my-1 hr-xeon d-none d-lg-block" />

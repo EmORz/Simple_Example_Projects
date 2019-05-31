@@ -1,0 +1,53 @@
+﻿@using Forum.ViewModels.Forum;
+@model ForumPostsInputModel;
+
+<div>
+    <div id="shoutbox" class="menu-bg-forum text-center">
+        <h1 class="m-0"><a id="main-heading-text" href="#">Category: @Model.Forum.Category.Name</a></h1>
+        <h2 class="m-0"><a class="text-white" href="#">Forum: @Model.Forum.Name</a></h2>
+        <h2><a class="m-10px modalBtn">Show Description</a></h2>
+        <div class="modal modalElement">
+            <div class="modal-content border-5 menu-bg-forum">
+                <span class="close">&times;</span>
+                <partial name="_ForumDescriptionPartial.cshtml" model="@Model.Forum.Description" />
+            </div>
+        </div>
+    </div>
+    <div id="create-post-div" class="text-center ">
+        <div class="post-button-div m-10px">
+            <a href="/Post/Create?id=@Model.Forum.Id" class="menu-bg-forum p-10 text-white border-5"><h3 class="m-10px display-inline"><i class="fas fa-plus"></i> Post a Topic</h3></a>
+        </div>
+        @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Owner"))
+        {
+            <partial name="_AdminOptionsPartial" />
+        }
+    </div>
+    <table class="two-thirds-width posts-table mx-5-auto">
+        <thead class="posts-table-head">
+            <tr>
+                <th class="p-10 bottom-black-border"><h2 class="m-10px">Title</h2></th>
+                <th class="p-10 bottom-black-border"><h2 class="m-10px">Statistics</h2></th>
+                <th class="p-10 bottom-black-border"><h2 class="m-10px">Date</h2></th>
+            </tr>
+        </thead>
+        <tbody class="posts-table-body text-center">
+            @foreach (var post in Model.Posts)
+            {
+                <tr>
+                    <td class="p-10 text-forum"><a href="/Post/Details?id=@post.Id" class="text-forum"><h2 class="m-0">@post.Name</h2></a></td>
+                    <td class="p-10 text-forum">
+                        <div>
+                            <p class="m-0">Views: @post.Views</p>
+                            <p class="m-0">Started by: @post.Author.UserName</p>
+                        </div>
+                    </td>
+                    <td class="p-10 text-forum bold">@post.StartedOn.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@await Component.InvokeAsync("Pagging", new { Controller = "Forum", Action = "Posts", Ids = (List<string>)this.ViewData["PostsIds"], PagesCount = Model.PagesCount, EntityId = Model.Forum.Id })
+@section Scripts {
+    <script src="~/js/modal.js"></script>
+}

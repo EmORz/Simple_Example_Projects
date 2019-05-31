@@ -1,0 +1,96 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Common;
+@using X.PagedList;
+
+@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Начална страница";
+}
+
+<div class="row mb-2">
+    <div class="col-md-12 col-lg-6">
+        @if (Model.SearchString != null)
+        {
+            <strong>Търсене на: </strong>@Model.SearchString
+        }
+    </div>
+    <div class="col-md-12 col-lg-6 text-right">
+        <form method="post" asp-controller="Home" asp-action="Index">
+            <input type="hidden" name="SearchString" value="@Model.SearchString">
+            <input type="hidden" name="ChildCategoryId" value="@Model.ChildCategoryId">
+            <input type="hidden" name="Page" value="@Model.PageNumber">
+            <span class="text-muted">Покажи:</span>
+            <select name="PageSize" onchange="this.form.submit();">
+                <option value="8" selected="@(Model.PageSize == 8 ? true : false)">8</option>
+                <option value="16" selected="@(Model.PageSize == 16 ? true : false)">16</option>
+                <option value="24" selected="@(Model.PageSize == 24 ? true : false)">24</option>
+                <option value="32" selected="@(Model.PageSize == 32 ? true : false)">32</option>
+                <option value="48" selected="@(Model.PageSize == 48 ? true : false)">48</option>
+            </select>
+            <span class="text-muted">Сортирай:</span>
+            <select name="SortBy" id="SortBy" onchange="this.form.submit();">
+                <option value="1" selected="@(Model.SortBy.ToString() == "Newest" ? true : false)">Най-нови</option>
+                <option value="2" selected="@(Model.SortBy.ToString() == "Oldest" ? true : false)">Най-стари</option>
+                <option value="3" selected="@(Model.SortBy.ToString() == "PriceDescending" ? true : false)">Цена(низх.)</option>
+                <option value="4" selected="@(Model.SortBy.ToString() == "PriceAscending" ? true : false)">Цена(възх.)</option>
+            </select>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var product in Model.ProductsViewModel)
+    {
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div class="card h-100">
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                    <div class="card-img-top zoom">
+                        <img src="@product.ImageUrl" alt="@product.Name">
+                    </div>
+                </a>
+                <div class="card-body text-center h-25 pb-0 pt-0 pl-0 pr-0">
+                    <div class="pb-1 mt-1">
+                        <span class="stars mx-auto pb-1 text-white">@product.Raiting</span>
+                    </div>
+                    <div>
+                        <a class="h6 font-italic text-info" asp-action="">@product.ReviewsCount @(product.ReviewsCount == 1 ? "ревю" : "ревюта")</a>
+                    </div>
+                    <div>
+                        <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id"><h6 class="card-title font-weight-bold">@product.Name</h6></a>
+                    </div>
+                </div>
+                <div class="mb-1">
+                    <ul class="list-group list-group-flush mb-0">
+                        <partial name="~/Views/Shared/Partials/_ProductPricePartial.cshtml" , model="@product" />
+                    </ul>
+                </div>
+                <div class="card-footer d-flex justify-content-around text-center bg-white pl-0 pr-0 pt-0 pb-0">
+                    <a asp-controller="Favorites" asp-action="Add" asp-route-id="@product.Id" class="btn btn-danger btn-md"><i class="fas fa-heart"></i></a>
+                    <a asp-controller="ShoppingCart" asp-action="Add" asp-route-id="@product.Id" class="btn btn-primary btn-md"><i class="fas fa-shopping-cart"></i> Добави</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="mt-3 d-flex justify-content-around">
+    @Html.PagedListPager((IPagedList)Model.ProductsViewModel, page => Url.Action("Index",
+                                            new {
+                                                PageNumber = page,
+                                                PageSize = Model.PageSize,
+                                                SearchString = Model.SearchString,
+                                                ChildCategoryId = Model.ChildCategoryId,
+                                                SortBy = Model.SortBy
+                                            }),
+                                            new PagedListRenderOptions
+                                            {
+                                                MaximumPageNumbersToDisplay = 5,
+                                                LiElementClasses = new string[] { "page-item" },
+                                                PageClasses = new string[] { "page-link" }
+                                            })
+</div>
+
+@section Scripts {
+    <script src="~/js/rating.js"></script>
+}

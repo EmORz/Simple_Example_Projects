@@ -1,0 +1,74 @@
+﻿@model UnravelTravel.Models.InputModels.AdministratorInputModels.Activities.ActivityCreateInputModel
+@{
+    this.ViewData["Title"] = "Create Activity";
+    var destinations = this.ViewData["Destinations"] as IEnumerable<SelectListItem>;
+}
+
+<div class="row justify-content-center">
+    <form enctype="multipart/form-data" asp-area="Administrator" asp-controller="Activities" asp-action="Create" method="post" class="text-center col-md-6">
+        <h4>Create new activity</h4>
+        <hr />
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control col-md-12" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <p>Image</p>
+            <input type="file" asp-for="Image" name="Image" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Date"></label>
+            <input asp-for="Date" class="form-control col-md-12" />
+            <small class="text-primary">* Please select local date and time</small>
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control col-md-12" rows="7"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DestinationId"></label>
+            <select asp-for="DestinationId" asp-items="destinations" class="form-control col-md-12">
+                <option selected="" disabled="">--Select destination--</option>
+            </select>
+            <span asp-validation-for="DestinationId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control col-md-12" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LocationName"></label>
+            <input asp-for="LocationName" class="form-control col-md-12" />
+            <span asp-validation-for="LocationName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type"></label>
+            <select class="form-control col-md-12" asp-for="Type"
+                    asp-items="@(Html.GetEnumSelectList<ActivityType>())">
+                <option selected="" disabled="">--Select activity type--</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control col-md-12" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdditionalInfo"></label>
+            <textarea asp-for="AdditionalInfo" class="form-control col-md-12" rows="3"></textarea>
+            <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-outline-success">Create activity</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

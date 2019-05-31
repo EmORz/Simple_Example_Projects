@@ -1,0 +1,6 @@
+{
+  "projects": [ "LearningSystem"],
+  "sdk": {
+    "version": "2.1.500"
+  }
+}

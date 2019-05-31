@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html class="bg-forum" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/css/dark.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>My - Forum</title>
+
+    <environment include="Development">
+    </environment>
+    <environment exclude="Development">
+    </environment>
+</head>
+<body class="bg-forum">
+    <partial name="_ConsentPartial" />
+    <div id="header" class="border-5">
+        <header class="menu-bg-forum border-5">
+            <nav class="main-nav menu-bg-forum full-width border-5">
+                <ul class="my-list">
+                    <li>
+                        <a class="bold text-white m-10px float-left" href="/">Home</a>
+                    </li>
+                    <div class="dropdown bold m-10px">
+                        <a class="button" onclick="myFunction()"><i class="fas fa-bars fa-lg"></i></a>
+                        <div id="myDropdown" class="admin-dropdown-content border-5">
+                            <partial name="_MenuOptionsPartial" />
+                            <a class="font-25" asp-controller="Home" asp-action="About">Rules</a>
+                        </div>
+                    </div>
+                    <li>
+                        <partial name="_LoginPartial" />
+                    </li>
+                </ul>
+                <div class="resposive-dropdown display-none bold m-10px">
+                    <a class="button" onclick="myResponsiveFunction()"><i class="fas fa-bars fa-2x"></i></a>
+                    <div id="myResponsiveDropdown" class="responsive-dropdown-content position-relative border-5">
+                        <partial name="_ResponsiveMenuPartial" />
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <main>
+        <div class="content bg-light">
+            @RenderBody()
+            <div id="footer" class="border-5">
+                <footer class="menu-bg-forum">Copyright &copy; 2018 My Forum Corporation</footer>
+            </div>
+        </div>
+    </main>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/navResponsivness.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿@using Forum.ViewModels.Quote;
+@model QuoteInputModel;
+
+<div id="shoutbox" class="menu-bg-forum text-center">
+    <h1 class="m-0"><a id="main-heading-text" href="#">Reply to: @this.ViewData["ReplierName"]</a></h1>
+    <h2 class="m-0"><a id="main-heading-text" href="#">Post: @this.ViewData["PostName"]</a></h2>
+</div>
+<div class="post-form mt-5">
+    <div class="text-white menu-bg-forum border-5 p-10 text-start two-thirds-width mx-auto">
+        <h4 class="m-0">@this.ViewData["ReplierName"] said:</h4>
+        <blockquote>
+            <i>@Html.Raw(Model.Quote)</i>
+        </blockquote>
+    </div>
+    <div class="container two-thirds-width mx-5-auto">
+        <form class="my-form" asp-controller="Quote" asp-action="QuoteAQuoteCreate">
+            <input type="hidden" hidden="hidden" asp-for="Quote" value="@Model.Quote" />
+            <input type="hidden" hidden="hidden" asp-for="RecieverId" value="@Model.RecieverId" />
+            <input type="hidden" hidden="hidden" asp-for="ReplyId" value="@Model.ReplyId" />
+            <input type="hidden" hidden="hidden" asp-for="QuoteRecieverId" value="@this.ViewData["QuoteRecieverId"]" />
+            <div class="text-center">
+                <div class="block">
+                    <div>
+                        <label class="text-forum bold">Reply</label>
+                    </div>
+                    <button title="italic" type="button" value="[i][/i]" class="text">italic</button>
+                    <button title="bold text" type="button" value="[b][/b]" class="text">bold</button>
+                    <button title="center text" type="button" value="[center][/center]" class="text">center</button>
+                    <button title="heading 1" type="button" value="[h1][/h1]" class="text">heading 1</button>
+                    <button title="heading 2" type="button" value="[h2][/h2]" class="text">heading 2</button>
+                    <button title="heading 3" type="button" value="[h3][/h3]" class="text">heading 3</button>
+                    <button title="horizontal line" type="button" value="[hr /]" class="text">horizontal line</button>
+                    <button title="ordered list" type="button" value="[ol][li][/li][/ol]" class="text"><i class="fas fa-list-ol"></i></button>
+                    <button title="unordered list" type="button" value="[ul][li][/li][/ul]" class="text"><i class="fas fa-list-ul"></i></button>
+                    <button title="list item" type="button" value="[li][/li]" class="text">list item</button>
+                    <textarea class="full-width post-textarea" rows="12" cols="10" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <button type="button" class="emote">😀</button>
+                <button type="button" class="emote">😃</button>
+                <button type="button" class="emote">😄</button>
+                <button type="button" class="emote">😆</button>
+                <button type="button" class="emote">🤣</button>
+                <button type="button" class="emote">🙂</button>
+                <button type="button" class="emote">😉</button>
+                <button type="button" class="emote">😊</button>
+                <button type="button" class="emote">😇</button>
+                <button type="button" class="emote">😍</button>
+                <button type="button" class="emote">😘</button>
+                <button type="button" class="emote">😋</button>
+                <button type="button" class="emote">😛</button>
+                <button type="button" class="emote">🤑</button>
+                <button type="button" class="emote">🤔</button>
+                <button type="button" class="emote">😐</button>
+                <button type="button" class="emote">😶</button>
+                <button type="button" class="emote">😬</button>
+                <button type="button" class="emote">😴</button>
+                <button type="button" class="emote">🤒</button>
+                <button type="button" class="emote">😎</button>
+                <button type="button" class="emote">🙁</button>
+                <button type="button" class="emote">😮</button>
+                <button type="button" class="emote">😲</button>
+                <button type="button" class="emote">😥</button>
+                <button type="button" class="emote">😭	</button>
+                <button type="button" class="emote">😓</button>
+                <button type="button" class="emote">😡</button>
+                <button type="button" class="emote">😈</button>
+                <button type="button" class="emote">💩</button>
+                <button type="button" class="emote">❤</button>
+            </div>
+            <div class="center-button">
+                <input onclick="window.history.back()" class="mt-25 submit-button menu-bg-forum text-white" type="button" value="Cancel">
+                <input class="mt-25 submit-button menu-bg-forum text-white" type="submit" value="Quote">
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

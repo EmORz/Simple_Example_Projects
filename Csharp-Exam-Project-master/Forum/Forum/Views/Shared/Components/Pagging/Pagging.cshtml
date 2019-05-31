@@ -1,0 +1,16 @@
+﻿@using Forum.ViewModels.Shared;
+@model PaggingViewModel;
+
+<div>
+    @{
+        var counter = 0;
+    }
+    <ul class="font-18 text-center text-forum">
+        @for (int i = 0; i < Model.PagesCount; i++)
+        {
+            var index = i + 1;
+            <li class="display-inline"><a class="menu-bg-forum p-10 text-white border-5" href="/@Model.ControllerName/@Model.ControllerAction?id=@Model.EntityId&start=@counter">@index</a></li>
+            counter = counter + 5;
+        }
+    </ul>
+</div>

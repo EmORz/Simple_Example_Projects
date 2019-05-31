@@ -1,0 +1,101 @@
+﻿@using Forum.ViewModels.Post;
+@using Forum.Models;
+@model EditPostInputModel;
+
+<div id="shoutbox" class="menu-bg-forum text-center">
+    <h1 class="m-0"><a id="main-heading-text" href="#">Edit Topic</a></h1>
+</div>
+<div class="post-form mt-5">
+    <div class="container two-thirds-width mx-5-auto">
+        <form class="my-form" asp-controller="Post" asp-action="Edit">
+            <input type="hidden" hidden="hidden" asp-for="Id" value="@Model.Id" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="block">
+                <label asp-for="Name" class="text-forum">Title</label>
+                <input asp-for="Name" class="full-width" type="text" placeholder="Enter post name...">
+                <div>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <hr class="full-width">
+            <div class="text-center">
+                <div class="block">
+                    <div>
+                        <label asp-for="Description" class="text-forum bold">Description</label>
+                    </div>
+                    <button title="italic" type="button" value="[i][/i]" class="text">italic</button>
+                    <button title="bold text" type="button" value="[b][/b]" class="text">bold</button>
+                    <button title="center text" type="button" value="[center][/center]" class="text">center</button>
+                    <button title="heading 1" type="button" value="[h1][/h1]" class="text">heading 1</button>
+                    <button title="heading 2" type="button" value="[h2][/h2]" class="text">heading 2</button>
+                    <button title="heading 3" type="button" value="[h3][/h3]" class="text">heading 3</button>
+                    <button title="ordered list" type="button" value="[ol][li][/li][/ol]" class="text"><i class="fas fa-list-ol"></i></button>
+                    <button title="unordered list" type="button" value="[ul][li][/li][/ul]" class="text"><i class="fas fa-list-ul"></i></button>
+                    <button title="list item" type="button" value="[li][/li]" class="text">list item</button>
+                    <textarea asp-for="Description" class="full-width post-textarea" rows="12" cols="10">Enter post Description...</textarea>
+                    <div>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="button" class="emote">😀</button>
+                <button type="button" class="emote">😃</button>
+                <button type="button" class="emote">😄</button>
+                <button type="button" class="emote">😆</button>
+                <button type="button" class="emote">🤣</button>
+                <button type="button" class="emote">🙂</button>
+                <button type="button" class="emote">😉</button>
+                <button type="button" class="emote">😊</button>
+                <button type="button" class="emote">😇</button>
+                <button type="button" class="emote">😍</button>
+                <button type="button" class="emote">😘</button>
+                <button type="button" class="emote">😋</button>
+                <button type="button" class="emote">😛</button>
+                <button type="button" class="emote">🤑</button>
+                <button type="button" class="emote">🤔</button>
+                <button type="button" class="emote">😐</button>
+                <button type="button" class="emote">😶</button>
+                <button type="button" class="emote">😬</button>
+                <button type="button" class="emote">😴</button>
+                <button type="button" class="emote">🤒</button>
+                <button type="button" class="emote">😎</button>
+                <button type="button" class="emote">🙁</button>
+                <button type="button" class="emote">😮</button>
+                <button type="button" class="emote">😲</button>
+                <button type="button" class="emote">😥</button>
+                <button type="button" class="emote">😭	</button>
+                <button type="button" class="emote">😓</button>
+                <button type="button" class="emote">😡</button>
+                <button type="button" class="emote">😈</button>
+                <button type="button" class="emote">💩</button>
+                <button type="button" class="emote">❤</button>
+            </div>
+            <hr class="full-width">
+            <div class="block">
+                <label asp-for="AllForums" class="text-forum">Select Forum:</label>
+                <div class="styled-select">
+                    <select asp-for="ForumId" class="menu-bg-forum half-width text-white">
+                        <option disabled selected="selected">Select Forum</option>
+                        @foreach (var forum in Model.AllForums)
+                        {
+                            if (forum.Name == this.Model.ForumName)
+                            {
+                                <option selected="selected" name="forumId" value="@forum.Id">@forum.Name</option>
+                            }
+                            else
+                            {
+                                <option name="forumId" value="@forum.Id">@forum.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="center-button">
+                <input onclick="window.history.back()" class="mt-25 submit-button menu-bg-forum text-white" type="button" value="Cancel">
+                <input class="mt-25 submit-button menu-bg-forum text-white" type="submit" value="Edit">
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

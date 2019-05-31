@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using UnravelTravel.Data.Models
+@inject SignInManager<UnravelTravelUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<ul class="nav d-block justify-content-around">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext) btn btn-outline-secondary">
+        <a asp-page="./Index">Profile</a>
+    </li>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext) btn btn-outline-secondary">
+        <a id="change-password" asp-page="./ChangePassword">Password</a>
+    </li>
+    @if (hasExternalLogins)
+    {
+        <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext) btn btn-outline-secondary">
+            <a id="external-login" asp-page="./ExternalLogins">External logins</a>
+        </li>
+    }
+    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext) btn btn-outline-secondary">
+        <a asp-page="./PersonalData">Personal data</a>
+    </li>
+</ul>

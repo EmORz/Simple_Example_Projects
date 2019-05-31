@@ -1,0 +1,27 @@
+﻿@model UnravelTravel.Models.ViewModels.Home.SearchResultViewModel
+
+<div id="searchResult">
+    <div class="row d-flex.justify-content-center">
+        <h3 class="col-md-12" style="color:salmon">@Model.DestinationName</h3>
+    </div>
+    @await this.Html.PartialAsync("_DestinationActivitiesPartial", @Model.Activities)
+    @if (!Model.Activities.Any())
+    {
+        <p class="text-center">
+            <em class="text-muted">No activities for this period</em>
+        </p>
+    }
+    <a asp-area="" asp-controller="Activities" asp-action="IndexInDestination" asp-route-destinationId="@Model.DestinationId"><h6 class="text-center text-center text-info">See all activities in @Model.DestinationName</h6></a>
+    <h4>Top rated restaurants</h4>
+    @await this.Html.PartialAsync("_DestinationRestaurantsPartial", @Model.Restaurants.Take(6))
+    @if (Model.Restaurants.Any())
+    {
+        <a asp-area="" asp-controller="Restaurants" asp-action="IndexInDestination" asp-route-destinationId="@Model.DestinationId"><h6 class="text-center text-center text-info">See all restaurants in @Model.DestinationName</h6></a>
+    }
+    else
+    {
+        <p class="text-center">
+            <em class="text-muted">No restaurants in this destination</em>
+        </p>
+    }
+</div>

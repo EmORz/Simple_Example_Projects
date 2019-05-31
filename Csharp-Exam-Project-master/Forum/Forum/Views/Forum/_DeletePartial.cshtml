@@ -1,0 +1,8 @@
+﻿@using Forum.ViewModels.Forum;
+@model ForumPostsInputModel;
+
+<h2 class="text-center m-10px">Are you sure that you want to delete this forum?</h2>
+<div class="mt-25 text-center">
+    <a class="submit-button text-red bg-white mr-5 closeBtn">No</a>
+    <a asp-controller="Forum" asp-action="Delete" asp-route-id="@Model.Forum.Id" class="submit-button text-red bg-white">Yes</a>
+</div>

@@ -1,0 +1,36 @@
+﻿@model UnravelTravel.Models.ViewModels.Destinations.DestinationDeleteViewModel
+@{
+    this.ViewData["Title"] = "Delete Destination";
+}
+<div class="row justify-content-center">
+    <form asp-area="Administrator" asp-controller="Destinations" asp-action="Delete" method="post" class="text-center col-md-6">
+        <h4>Delete destination</h4>
+        <hr />
+        <fieldset disabled="">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control col-md-12" value="@Model.Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryId"></label>
+                <input asp-for="CountryName" class="form-control col-md-12" value="@Model.CountryName"/>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div form-group>
+                <label asp-for="@Model.ImageUrl"></label>
+                <img style="height: 200px; width: 100%;" class="card-img-top" src="@Model.ImageUrl" alt="Destination image"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Information"></label>
+                <textarea class="form-control col-md-12" rows="7" asp-for="Information" value="@Model.Information"></textarea>
+                <span asp-validation-for="Information" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-outline-warning">Delete destination</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

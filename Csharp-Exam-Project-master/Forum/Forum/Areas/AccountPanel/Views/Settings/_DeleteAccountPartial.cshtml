@@ -1,0 +1,29 @@
+﻿@using Forum.ViewModels.Settings
+@model DeleteUserInputModel;
+
+<div class="text-center p-10 text-white menu-bg-forum">
+    <h2 class="text-center text-white">Enter Account Information</h2>
+    <hr class="bg-white" />
+    <form asp-area="AccountPanel" asp-controller="Settings" asp-action="DeleteAccount" method="post" class="m-10">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <h3 class="m-0"><label>Username</label></h3>
+        <div class="block">
+            <input type="text" asp-for="Username" />
+            <div>
+                <span class="text-danger" asp-validation-for="Username"></span>
+            </div>
+        </div>
+        <h3 class="m-0"><label>Password</label></h3>
+        <div class="block">
+            <input type="password" asp-for="Password" />
+            <div>
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+        </div>
+        <div class="block m-10">
+            <input class="submit-button bg-white text-forum" type="submit" value="Submit" />
+        </div>
+    </form>
+</div>
+
+<partial name="_ValidationScriptsPartial" />

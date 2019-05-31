@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="email-confirmation.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.5.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="2.1.6" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-beta.61" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\UnravelTravel.Data.Models\UnravelTravel.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Models\UnravelTravel.Models.InputModels\UnravelTravel.Models.InputModels.csproj" />
+    <ProjectReference Include="..\..\Models\UnravelTravel.Models.ViewModels\UnravelTravel.Models.ViewModels.csproj" />
+    <ProjectReference Include="..\..\UnravelTravel.Common\UnravelTravel.Common.csproj" />
+    <ProjectReference Include="..\UnravelTravel.Services.Mapping\UnravelTravel.Services.Mapping.csproj" />
+  </ItemGroup>
+
+</Project>

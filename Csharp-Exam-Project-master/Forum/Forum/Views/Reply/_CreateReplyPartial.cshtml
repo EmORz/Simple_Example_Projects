@@ -1,0 +1,65 @@
+﻿@using Forum.ViewModels.Reply;
+@model ReplyInputModel;
+
+<div>
+    <div class="full-width">
+        <form class="my-form" asp-controller="Reply" asp-action="Create" method="post">
+            <input type="hidden" hidden="hidden" asp-for="@Model.PostId" value="@this.ViewData["PostId"]" />
+            <span asp-validation-for="@Model.PostId"></span>
+            <div class="text-center">
+                <div class="block">
+                    <div>
+                        <h2><label class="text-forum bold">Reply</label></h2>
+                    </div>
+                    <button title="italic" type="button" value="[i][/i]" class="text">italic</button>
+                    <button title="bold text" type="button" value="[b][/b]" class="text">bold</button>
+                    <button title="center text" type="button" value="[center][/center]" class="text">center</button>
+                    <button title="heading 1" type="button" value="[h1][/h1]" class="text">heading 1</button>
+                    <button title="heading 2" type="button" value="[h2][/h2]" class="text">heading 2</button>
+                    <button title="heading 3" type="button" value="[h3][/h3]" class="text">heading 3</button>
+                    <button title="ordered list" type="button" value="[ol][li][/li][/ol]" class="text"><i class="fas fa-list-ol"></i></button>
+                    <button title="unordered list" type="button" value="[ul][li][/li][/ul]" class="text"><i class="fas fa-list-ul"></i></button>
+                    <button title="list item" type="button" value="[li][/li]" class="text">list item</button>
+                    <textarea asp-for="@Model.Description" class="full-width post-textarea" rows="12" cols="10">Enter reply...</textarea>
+                    <span class="text-red" asp-validation-for="@Model.Description"></span>
+                </div>
+                <button type="button" class="emote">😀</button>
+                <button type="button" class="emote">😃</button>
+                <button type="button" class="emote">😄</button>
+                <button type="button" class="emote">😆</button>
+                <button type="button" class="emote">🤣</button>
+                <button type="button" class="emote">🙂</button>
+                <button type="button" class="emote">😉</button>
+                <button type="button" class="emote">😊</button>
+                <button type="button" class="emote">😇</button>
+                <button type="button" class="emote">😍</button>
+                <button type="button" class="emote">😘</button>
+                <button type="button" class="emote">😋</button>
+                <button type="button" class="emote">😛</button>
+                <button type="button" class="emote">🤑</button>
+                <button type="button" class="emote">🤔</button>
+                <button type="button" class="emote">😐</button>
+                <button type="button" class="emote">😶</button>
+                <button type="button" class="emote">😬</button>
+                <button type="button" class="emote">😴</button>
+                <button type="button" class="emote">🤒</button>
+                <button type="button" class="emote">😎</button>
+                <button type="button" class="emote">🙁</button>
+                <button type="button" class="emote">😮</button>
+                <button type="button" class="emote">😲</button>
+                <button type="button" class="emote">😥</button>
+                <button type="button" class="emote">😭	</button>
+                <button type="button" class="emote">😓</button>
+                <button type="button" class="emote">😡</button>
+                <button type="button" class="emote">😈</button>
+                <button type="button" class="emote">💩</button>
+                <button type="button" class="emote">❤</button>
+            </div>
+            <div class="m-10px text-center">
+                <input class="mt-25 submit-button menu-bg-forum text-white" type="submit" value="Reply">
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />

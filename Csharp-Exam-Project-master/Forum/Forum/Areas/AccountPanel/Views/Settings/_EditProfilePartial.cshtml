@@ -1,0 +1,52 @@
+﻿@using Forum.ViewModels.Settings
+@model EditProfileInputModel;
+
+<div class="text-center p-10 text-white menu-bg-forum">
+    <h2 class="text-center text-white">Edit Profile</h2>
+    <hr class="bg-white" />
+    <form asp-area="AccountPanel" asp-controller="Settings" asp-action="EditProfile" method="post" class="m-10">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <h3 class="m-0"><label asp-for="Username"></label></h3>
+        <div class="block">
+            <input asp-for="Username" class="full-width" type="text" />
+            <span class="text-danger" asp-validation-for="Username"></span>
+        </div>
+        <div class="register-container m-0">
+            <div class="block">
+                <h3 class="m-0"><label asp-for="Password">Password</label></h3>
+                <input asp-for="Password" class="full-width" type="password" />
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="block m-0">
+                <h3 class="m-0"><label asp-for="ConfirmPassword">Confirm Password</label></h3>
+                <input asp-for="ConfirmPassword" class="full-width" type="password" />
+                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+            </div>
+        </div>
+        <div class="block m-0">
+            <h3 class="m-0"><label asp-for="Location">Location</label></h3>
+            <input asp-for="Location" class="full-width" type="text">
+            <div>
+                <span class="text-danger" asp-validation-for="Location"></span>
+            </div>
+        </div>
+        <div class="block">
+            <label class="text-forum">Gender</label>
+        </div>
+        <div class="radio-div text-center">
+            <label asp-for="Gender" class="text-white" for="male">Male</label>
+            <input asp-for="Gender" type="radio" class="checkmark" name="gender" id="male" value="Male">
+            <span class="text-danger" asp-validation-for="Gender"></span>
+            <label asp-for="Gender" class="text-white" for="female">Female</label>
+            <input asp-for="Gender" type="radio" class="checkmark" name="gender" id="female" value="Female">
+            <span class="text-danger" asp-validation-for="Gender"></span>
+            <label asp-for="Gender" class="text-white" for="other">Other</label>
+            <input asp-for="Gender" type="radio" class="checkmark" name="gender" id="other" value="Other">
+            <span class="text-danger" asp-validation-for="Gender"></span>
+        </div>
+        <div class="block m-10">
+            <input class="submit-button bg-white text-forum" type="submit" value="Submit" />
+        </div>
+    </form>
+</div>
+<partial name="_ValidationScriptsPartial" />

@@ -1,0 +1,60 @@
+﻿@using Forum.ViewModels.Report;
+@model IEnumerable<ReplyReportViewModel>
+
+<div id="shoutbox" class="menu-bg-forum text-center">
+    <h1 class="m-10px"><a id="main-heading-text" href="#">Reply Reports</a></h1>
+    <h2 class="m-0"><a id="main-heading-text" href="#">Count: @this.ViewData["ReplyReportsCount"]</a></h2>
+</div>
+
+<table class="posts-table mx-5-auto">
+    <thead class="posts-table-head">
+        <tr>
+            <th class="bottom-black-border"><h4>Actions</h4></th>
+            <th class="bottom-black-border"><h4>ReportedOn</h4></th>
+        </tr>
+    </thead>
+    <tbody class="posts-table-body text-center">
+        @foreach (var report in Model)
+        {
+            <tr>
+                <td class="text-forum">
+                    <input type="hidden" hidden="hidden" class="entityId" value="@report.Id" />
+                    <div class="container-half">
+                        <div>
+                            <a class="report-action-buttons text-white menu-bg-forum modalBtn">Review</a>
+                            <div class="modal modalElement">
+                                <div class="modal-content border-5 menu-bg-forum">
+                                    <div>
+                                        <span class="close">&times;</span>
+                                    </div>
+                                    <partial name="~/Views/Report/Reply/_ReviewReplyReportPartial.cshtml" model="@report" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a class="report-action-buttons text-white bg-dark-red dismissButton">Dismiss</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-forum"><h3>@report.ReportedOn.ToString("dd-MM-yyyy")</h3></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @{
+        var counter = 0;
+    }
+    <ul class="font-18 text-center text-forum">
+        @for (int i = 0; i < (int)this.ViewData["PagesCount"]; i++)
+        {
+            var pageIndex = i + 1;
+            <li class="display-inline"><a class="menu-bg-forum hover-pointer reply-report-page-btn p-10 text-white border-5">@pageIndex</a></li>
+            counter = counter + 5;
+        }
+    </ul>
+</div>
+
+@section Scripts{
+    <script src="~/js/dismissReplyReports.js"></script>
+}

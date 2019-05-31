@@ -1,0 +1,16 @@
+﻿@using LearningSystem.Web.Areas.Admin.Controllers
+@using Microsoft.Extensions.Localization
+
+@model IEnumerable<LearningSystem.Web.Areas.Admin.Models.Course.AllCoursesViewModel>
+@inject IStringLocalizer<CoursesController> Localizer
+
+@{
+    ViewData["Title"] = Localizer["All courses"];
+}
+
+<h2>@ViewData["Title"]</h2>
+<a asp-area="Admin"
+   asp-controller="Courses"
+   asp-action="Create"
+   class="btn btn-success"><i class="fa fa-plus"></i> @Localizer["Create new course"]</a>
+<ul>@Html.DisplayForModel()</ul>

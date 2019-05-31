@@ -1,0 +1,94 @@
+﻿@using Forum.ViewModels.Message;
+@model SendMessageInputModel;
+
+@if (Model.RecieverId == null && Model.RecieverName == null)
+{
+    <h3 class="menu-bg-forum text-center text-white p-10 m-0">Chatting with Nobody</h3>
+}
+else
+{
+    <h3 class="menu-bg-forum text-center text-white p-10 m-0">Chatting with @Model.RecieverName</h3>
+}
+    <div id="chat-box" class="p-10">
+        @if (Model.Messages == null)
+        {
+            <p class="menu-bg-forum text-center text-white p-0 m-0">Please choose a person from the search bar.</p>
+        }
+        else
+        {
+            if (Model.ShowAll == false)
+            {
+                <div class="text-forum text-center">
+                    <a id="showMoreBtn" href="#">Show all messages</a>
+                </div>
+            }
+            else
+            {
+                <div class="text-forum text-center">
+                    <a href="#">No other messages to show</a>
+                </div>
+            }
+            @foreach (var message in Model.Messages.Take(5))
+            {
+                if (message.Author.UserName == this.User.Identity.Name)
+                {
+                    <div class="bg-burly text-forum p-10 m-10px half-width float-left border-5">
+                        <p class="bold m-0">@message.Author.UserName said:</p>
+                        <p class="p-10">@message.Description</p>
+                        <p class="m-0 font-14 text-end sent-on"><b>Sent on</b> @message.CreatedOn</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="bg-burly text-forum p-10 m-10px half-width float-right border-5">
+                        <p class="bold m-0">@message.Author.UserName said:</p>
+                        <p class="p-10">@message.Description</p>
+                        <p class="m-0 font-14 text-end sent-on"><b>Sent on</b> @message.CreatedOn</p>
+                    </div>
+                }
+            }
+        }
+    </div>
+<div class="content-container mt-25">
+    <input asp-for="RecieverName" type="hidden" value="@Model.RecieverName" hidden="hidden" />
+    <input asp-for="RecieverId" type="hidden" hidden="hidden" />
+    <div class="p-10 text-end">
+        <textarea asp-for="Description" rows="5" class="full-width font-18"></textarea>
+        <button id="sendButton" class="m-0 p-0 submit-button menu-bg-forum text-white" type="submit"><i class="fas fa-share-square"></i></button>
+    </div>
+    <div id="chat-emoticons-wrapper" class="text-center p-10">
+        <button type="button" class="emote">😀</button>
+        <button type="button" class="emote">😃</button>
+        <button type="button" class="emote">😄</button>
+        <button type="button" class="emote">😆</button>
+        <button type="button" class="emote">🤣</button>
+        <button type="button" class="emote">🙂</button>
+        <button type="button" class="emote">😉</button>
+        <button type="button" class="emote">😊</button>
+        <button type="button" class="emote">😇</button>
+        <button type="button" class="emote">😍</button>
+        <button type="button" class="emote">😘</button>
+        <button type="button" class="emote">😋</button>
+        <button type="button" class="emote">😛</button>
+        <button type="button" class="emote">🤑</button>
+        <button type="button" class="emote">🤔</button>
+        <button type="button" class="emote">😐</button>
+        <button type="button" class="emote">😶</button>
+        <button type="button" class="emote">😬</button>
+        <button type="button" class="emote">😴</button>
+        <button type="button" class="emote">🤒</button>
+        <button type="button" class="emote">😎</button>
+        <button type="button" class="emote">🙁</button>
+        <button type="button" class="emote">😮</button>
+        <button type="button" class="emote">😲</button>
+        <button type="button" class="emote">😥</button>
+        <button type="button" class="emote">😭	</button>
+        <button type="button" class="emote">😓</button>
+        <button type="button" class="emote">😡</button>
+        <button type="button" class="emote">😈</button>
+        <button type="button" class="emote">💩</button>
+        <button type="button" class="emote">❤</button>
+    </div>
+</div>
+
+<script src="~/js/chatShowAll.js"></script>

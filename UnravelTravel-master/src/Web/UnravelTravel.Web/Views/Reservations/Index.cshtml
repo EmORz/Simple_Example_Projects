@@ -1,0 +1,72 @@
+﻿@model IEnumerable<UnravelTravel.Models.ViewModels.Reservations.ReservationDetailsViewModel>
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<h3 class="text-center">My Reservations</h3>
+<table class="table table-hover" style="width: 100%" id="reservationsTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationDayString)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationHourString)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserFullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeopleCount)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td display-for="@item.Id"></td>
+                <td>
+                    <a class="text-dark" asp-area="" asp-controller="Restaurants" asp-action="Details" asp-route-id="@item.RestaurantId">
+                        @item.RestaurantName
+                    </a>
+                </td>
+                <td display-for="@item.ReservationDayString"> </td>
+                <td display-for="@item.ReservationHourString"> </td>
+                <td display-for="@item.UserFullName"></td>
+                <td display-for="@item.PeopleCount"> </td>
+                <td>
+                    @await this.Html.PartialAsync("_DetailsModalPartial", @item)
+                    @if (item.HasPassed)
+                    {
+                        if (item.IsRated)
+                        {
+                            <button class="btn btn-outline-primary" disabled="">Reviewed</button>
+                        }
+                        else
+                        {
+                            await this.Html.RenderPartialAsync("_ReviewModalPartial", @item);
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#reservationsTable').addClass('nowrap').dataTable({
+                responsive: true,
+            });
+        });
+    </script>
+}

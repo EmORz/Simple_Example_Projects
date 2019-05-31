@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding;
+@model ModelStateDictionary;
+
+<div class="text-center bg-red m-5 p-10">
+    @foreach (var error in Model)
+    {
+        foreach (var message in error.Value.Errors)
+        {
+            <h2 class="text-white">@message.ErrorMessage</h2>
+        }
+    }
+</div>

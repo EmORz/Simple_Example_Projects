@@ -1,0 +1,60 @@
+﻿@using Forum.Models;
+@using Forum.ViewModels.Report;
+@model Quote;
+
+<div class="post-wrapper bg-burly mt-25">
+    <div class="container-half text-forum bold">
+        <div>
+            <h3 class="m-0 float-left">Quote</h3>
+        </div>
+        <div>
+            <h3 class="m-0 float-right">@Model.QuotedOn.ToString("dd-MM-yyyy")</h3>
+        </div>
+    </div>
+    <div class="post-container text-forum m-0">
+        <div class="bg-light text-center  border-black-right p-10">
+            <div class="m-10px bg-white border-5">
+                <a href="/AccountPanel/Profile/Details?id=@Model.AuthorId">@Model.Author.UserName</a>
+            </div>
+            <div class="m-10">
+                <i class="fas fa-user-alt fa-5x text-forum"></i>
+            </div>
+            <div class="m-10px bg-white border-5">
+                <p class="m-0">Joined on: @Model.Author.RegisteredOn.ToString("dd-MM-yyyy")</p>
+            </div>
+            <div class="m-10px bg-white border-5">
+                <p class="m-0">Posts: @Model.Author.Posts.Count</p>
+            </div>
+        </div>
+        <div class="bg-white text-start p-10">
+            <blockquote class="bg-light border-5 p-10">
+                <div>
+                    <b>@Model.Reply.Author.UserName</b> said:
+                </div>
+                <hr />
+                <div class="text-center">
+                    @Html.Raw(Model.Reply.Description)
+                </div>
+                <hr />
+                <div class="text-end"> on <b>@Model.Reply.RepliedOn.ToString("dd-MM-yyyy")</b></div>
+            </blockquote>
+            <blockquote class="m-0 font-14">
+                @Html.Raw(Model.Description)
+            </blockquote>
+        </div>
+    </div>
+</div>
+@if (this.User.Identity.IsAuthenticated)
+{
+    @if (this.User.Identity.Name != Model.Author.UserName)
+    {
+        <a class="m-10px dark-red modalBtn"><i class="fas fa-thumbs-down"></i> Report</a>
+        <div class="modal modalElement">
+            <div class="modal-content border-5 bg-dark-red">
+                <span class="close">&times;</span>
+                <partial name="~/Views/Report/Quote/_QuoteReportPartial.cshtml" model="new QuoteReportInputModel { QuoteId = Model.Id }" view-data="this.ViewData" />
+            </div>
+        </div>
+    }
+    <a asp-controller="Quote" asp-action="Quote" asp-route-id="@Model.Id" class="text-forum m-10px quoteBtn"><i class="fab fa-replyd"></i> Quote</a>
+}

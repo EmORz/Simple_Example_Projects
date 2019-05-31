@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<XeonUser> SignInManager
+@inject UserManager<XeonUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle"></i> Здравей, @UserManager.GetUserName(User)!
+            </a>
+            <div class="dropdown-menu xeon-color" aria-labelledby="navbarDropdown">
+                <a asp-area="" asp-controller="Orders" asp-action="My" class="dropdown-item nav-link text-white"><i class="fas fa-history"></i> Моите поръчки</a>
+                <a asp-area="" asp-controller="Favorites" asp-action="All" class="dropdown-item nav-link text-white"><i class="fas fa-heart"></i> Любими</a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="dropdown-item nav-link text-white"><i class="fas fa-cog"></i> Настройки</a>
+                <a asp-area="Identity" asp-page="/Account/Logout" class="dropdown-item nav-link text-white"><i class="fas fa-sign-out-alt"></i> Изход</a>
+            </div>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+            <a asp-area="Identity" asp-page="/Account/Login" class="nav-link text-white"><i class="fas fa-user"></i> Вход</a>
+        </li>
+    </ul>
+}
+
+@await Component.InvokeAsync(typeof(ShoppingCartBasketComponent))

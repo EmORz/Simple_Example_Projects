@@ -1,0 +1,17 @@
+﻿@using Forum.ViewModels.Profile;
+@model ProfileInfoViewModel;
+
+<div id="shoutbox" class="menu-bg-forum text-center">
+    <h1><a id="main-heading-text" href="#">Registered on: @Model.RegisteredOn.ToString("dd-MM-yyyy")</a></h1>
+</div>
+<div class="three-fragments-grid text-forum text-center mx-5-auto two-thirds-width p-10">
+    <div class="text-white menu-bg-forum p-10 ">
+        <h4>Gender: @Model.Gender</h4>
+    </div>
+    <div class="text-white menu-bg-forum p-10">
+        <h4>Posts count: @Model.PostsCount</h4>
+    </div>
+    <div class="text-white menu-bg-forum p-10">
+        <h4>From: @Model.Location</h4>
+    </div>
+</div>

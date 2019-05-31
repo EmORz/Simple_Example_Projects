@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forum.Services.Interfaces\Forum.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Forum.ViewModels.Common\Forum.ViewModels.Common.csproj" />
+  </ItemGroup>
+
+</Project>

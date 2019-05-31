@@ -1,0 +1,15 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ForumUser> SignInManager
+@inject UserManager<ForumUser> UserManager
+
+@if (this.User.Identity.IsAuthenticated)
+{
+    <a class="m-10px bold text-white float-right" href="/Account/Dismiss">Logout</a>
+    <a class="m-10px bold text-white float-right" href="/Account/Profile">Profile</a>
+}
+else
+{
+    <a class="m-10px bold text-white float-right" href="/Account/Register">Register</a>
+    <a class="m-10px bold text-white float-right" href="/Account/Login">Login</a>
+}

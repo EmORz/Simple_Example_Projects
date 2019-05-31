@@ -1,0 +1,54 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<div class="mx-auto modal-dialog text-center">
+    <div class="modal-content">
+        <div class="modal-heading mt-3">
+            <div class="row d-flex justify-content-around">
+                <div class="col-sm-7 col-xs-7">
+                    <h4>Вход за потребители</h4>
+                </div>
+                <div class="col-sm-5 col-xs-5">
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><h4>Регистрация</h4></a>
+                </div>
+            </div>
+        </div>
+        <div class="container mb-2">
+            <form method="post">
+                <hr class="hr-xeon" />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="Input.Email" class="form-control" placeholder="E-mail" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.Password" class="form-control" placeholder="Парола" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <div class="text-right">
+                        <a asp-page="./ForgotPassword" class="pr-2">Забравена парола?</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn xeon-color text-white">Вход</button>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+            </form>
+            <partial name="_ExternalLoginPartial" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
