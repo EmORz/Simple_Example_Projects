@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.6.0" />
-    <PackageReference Include="HtmlSanitizer" Version="4.0.199" />
+    <PackageReference Include="HtmlSanitizer" Version="5.0.372" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
   </ItemGroup>
 
